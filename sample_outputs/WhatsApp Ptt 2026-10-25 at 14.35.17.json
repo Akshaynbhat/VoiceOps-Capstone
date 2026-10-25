@@ -1,0 +1,20 @@
+{
+  "file": "WhatsApp Ptt 2026-10-25 at 14.35.17.ogg",
+  "transcript": "is there a student discount",
+  "reply": "I am ZentroMart's AI support assistant. I'm sorry, I don't have that information. I can connect you with a human colleague for further assistance.",
+  "retrieved_sections": [
+    "CPN-1",
+    "REF-4",
+    "PAY-2",
+    "CPN-2",
+    "CPN-3"
+  ],
+  "tool_calls": [],
+  "decision": "answer",
+  "error": "",
+  "ticket_id": null,
+  "stt_seconds": 1.39,
+  "agent_seconds": 0.38,
+  "tts_seconds": 3.25,
+  "reply_audio": "WhatsApp Ptt 2026-10-25 at 14.35.17.wav"
+}

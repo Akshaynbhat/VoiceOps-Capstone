@@ -32,3 +32,4 @@ my_audio/
 # sample outputs ARE part of the submission
 !sample_outputs/
 !sample_outputs/**
+app.log

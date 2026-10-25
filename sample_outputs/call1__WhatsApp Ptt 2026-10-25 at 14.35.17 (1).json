@@ -1,0 +1,20 @@
+{
+  "file": "call1/WhatsApp Ptt 2026-10-25 at 14.35.17 (1).ogg",
+  "transcript": "is there a student discount",
+  "reply": "I’m sorry, I don’t have that information. I can connect you with a human colleague for further assistance.",
+  "retrieved_sections": [
+    "CPN-1",
+    "REF-4",
+    "PAY-2",
+    "CPN-2",
+    "CPN-3"
+  ],
+  "tool_calls": [],
+  "decision": "answer",
+  "error": "",
+  "ticket_id": null,
+  "stt_seconds": 1.37,
+  "agent_seconds": 0.4,
+  "tts_seconds": 2.12,
+  "reply_audio": "call1__WhatsApp Ptt 2026-10-25 at 14.35.17 (1).wav"
+}

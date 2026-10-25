@@ -1,0 +1,21 @@
+{
+  "file": "call1/WhatsApp Ptt 2026-10-25 at 14.35.13 (1).ogg",
+  "transcript": "how fast are refunds to the centromart wallet",
+  "reply": "I’m ZentroMart’s AI support assistant. Refunds to the ZentroMart Wallet are instant, within 2 hours of initiation.",
+  "retrieved_sections": [
+    "REF-2",
+    "PAY-4",
+    "FAQ-1",
+    "RET-7",
+    "PAY-1",
+    "KB-00.1"
+  ],
+  "tool_calls": [],
+  "decision": "answer",
+  "error": "",
+  "ticket_id": null,
+  "stt_seconds": 1.45,
+  "agent_seconds": 0.43,
+  "tts_seconds": 2.99,
+  "reply_audio": "call1__WhatsApp Ptt 2026-10-25 at 14.35.13 (1).wav"
+}

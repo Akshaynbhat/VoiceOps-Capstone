@@ -1,0 +1,36 @@
+{
+  "file": "call1/WhatsApp Ptt 2026-10-25 at 14.35.39.ogg",
+  "transcript": "i need help with my order order number 18599253 last four digits are 4265",
+  "reply": "Your order 1859 9253 was delivered on 12 October 2026. How can I help you today?",
+  "retrieved_sections": [
+    "IDV-2",
+    "STY-3",
+    "REF-6",
+    "IDV-3",
+    "KB-00.4"
+  ],
+  "tool_calls": [
+    {
+      "name": "lookup_order",
+      "args": {
+        "order_id": "18599253"
+      },
+      "verified": null
+    },
+    {
+      "name": "lookup_order",
+      "args": {
+        "order_id": "18599253",
+        "verification_value": "****"
+      },
+      "verified": true
+    }
+  ],
+  "decision": "answer",
+  "error": "",
+  "ticket_id": null,
+  "stt_seconds": 1.79,
+  "agent_seconds": 0.42,
+  "tts_seconds": 2.24,
+  "reply_audio": "call1__WhatsApp Ptt 2026-10-25 at 14.35.39.wav"
+}
