@@ -21,7 +21,7 @@ customer audio → Gnani STT → agent (router → controller → retrieval + bu
 ## Setup
 
 ```bash
-git clone https://github.com/your-akshaynbhat/VoiceOps-Capstone.git
+git clone https://github.com/your-username/VoiceOps-Capstone.git
 cd VoiceOps-Capstone
 pip install -r requirements.txt          # needs ffmpeg on PATH for webm/mp3/m4a input
 cp .env.example .env                     # then fill in GROQ_API_KEY and GNANI_API_KEY
