@@ -1,149 +1,77 @@
+"""Gradio demo: speak (or type) -> Gnani STT -> agent -> Gnani TTS. Use this to record the 2-minute demo.
 
-import os, sys
+    python app.py --dataset <extracted_dataset_folder>
+"""
+import argparse
+import sys
+import time
 from pathlib import Path
+
 import gradio as gr
-import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
-DATASET = Path(os.environ.get(
-    "VOICEOPS_DATASET_DIR",
-    "/content/voiceops_dataset/Capstone_Project_Dataset_FTTT_2026"
-))
+from voiceops import config  # noqa: E402
 
-from voiceops.speech import transcribe_audio, synthesize_reply
-from voiceops.retrieval import load_kb, build_retriever, retrieve_kb
-from voiceops.agent import ConversationState, handle_message
-from voiceops.refund_handler import answer_refund_timeline
+ap = argparse.ArgumentParser()
+ap.add_argument("--dataset", default=None)
+ap.add_argument("--no-share", action="store_true")
+args, _ = ap.parse_known_args()
+if args.dataset:
+    config.set_dataset_dir(args.dataset)
 
-chunks = load_kb(str(DATASET))
-vectorizer, matrix = build_retriever(chunks)
+from voiceops.agent import Agent, ConversationState  # noqa: E402
+from voiceops.speech import synthesize_reply, transcribe_audio  # noqa: E402
 
-def load_csv(name):
-    path = DATASET / "data" / name
-    return pd.read_csv(path) if path.exists() else pd.DataFrame()
+agent = Agent()
 
-orders = load_csv("orders.csv")
-customers = load_csv("customers.csv")
-holidays_df = load_csv("holidays.csv")
-holidays = (
-    holidays_df.iloc[:, 0].dropna().astype(str).tolist()
-    if not holidays_df.empty else []
-)
-state = ConversationState()
 
-def answer_question(message):
-    results = retrieve_kb(message, chunks, vectorizer, matrix, top_k=5)
-    evidence = "\n\n".join(
-        str(item.get("text", "")) for item in results
-    )
-    api_key = os.environ.get("GROQ_API_KEY", "")
-    if not api_key:
-        try:
-            from google.colab import userdata
-            api_key = userdata.get("GROQ_API_KEY") or ""
-        except Exception:
-            pass
-
-    if api_key and evidence.strip():
-        from groq import Groq
-        client = Groq(api_key=api_key)
-        response = client.chat.completions.create(
-            model="openai/gpt-oss-20b",
-            messages=[
-                {"role": "system", "content":
-                 "You are ZentroMart customer support. Answer using only "
-                 "the supplied knowledge-base evidence. If evidence is "
-                 "insufficient, say so and ask a focused question. Never "
-                 "invent policy details.\n\nEVIDENCE:\n" + evidence},
-                {"role": "user", "content": message}
-            ],
-            temperature=0.1,
-        )
-        return response.choices[0].message.content, evidence
-
-    return (
-        "I found these relevant policy details. Please configure GROQ_API_KEY "
-        "in Colab Secrets for grounded natural-language answers.\n\n" + evidence,
-        evidence
-    )
-
-def respond(audio, typed_message, language, history):
-    global state
-    message = (typed_message or "").strip()
+def respond(audio, typed, stt_lang, chat, state):
+    state = state or ConversationState()
+    msg, note = (typed or "").strip(), ""
     if audio is not None:
-        message = transcribe_audio(audio, language_code=language)
-    if not message:
-        return history, "", None, "Please record audio or type a message."
-
-    # Try the deterministic refund handler first; otherwise use the agent/RAG.
-    try:
-        refund = answer_refund_timeline(message, orders, holidays)
-    except Exception:
-        refund = None
-
-    if refund:
-        reply = str(refund)
-        evidence = "Refund timeline handler"
-    else:
-        reply, evidence = answer_question(message)
         try:
-            result = handle_message(
-                message, state, orders_df=orders, customers_df=customers,
-                rag_fn=lambda q: answer_question(q)[0]
-            )
-            if isinstance(result, str) and result.strip():
-                reply = result
-            elif isinstance(result, dict):
-                reply = result.get("response") or result.get("reply") or reply
-        except Exception:
-            pass
-
-    history = list(history or [])
-    history.extend([
-        {"role": "user", "content": message},
-        {"role": "assistant", "content": reply}
-    ])
-
-    output_audio = None
+            msg = transcribe_audio(audio, language_code=stt_lang)
+        except Exception as e:
+            note = f"STT error: {e}"
+    if not msg:
+        reply = "Sorry, I didn't catch that. Could you please say it again?"
+        res = {"retrieved_sections": [], "tool_calls": [], "decision": "clarify"}
+    else:
+        res = agent.handle(msg, state)
+        reply = res["reply"]
+    chat = list(chat or []) + [{"role": "user", "content": msg or "(unclear audio)"},
+                               {"role": "assistant", "content": reply}]
+    out = None
     try:
-        output_path = ROOT / "outputs" / "latest_reply.wav"
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_audio = synthesize_reply(
-            reply, str(output_path), language_code=language
-        )
-    except Exception as exc:
-        evidence += f"\n\nSpeech output unavailable: {exc}"
+        out = synthesize_reply(reply, ROOT / "outputs" / f"reply_{int(time.time())}.wav")
+    except Exception as e:
+        note += f" TTS error: {e}"
+    info = (f"Decision: {res['decision']}\nSections used: {', '.join(res['retrieved_sections'])}\n"
+            f"Tool calls: {res['tool_calls']}\n{note}").strip()
+    return chat, state, None, "", out, info
 
-    return history, "", output_audio, evidence
 
 with gr.Blocks(title="ZentroMart VoiceOps") as demo:
-    gr.Markdown("# ZentroMart VoiceOps Support\nSpeak or type your customer-support question.")
-    history = gr.State([])
-    chat = gr.Chatbot(label="Conversation")
-    audio_in = gr.Audio(sources=["microphone", "upload"], type="filepath",
-                        label="Speak or upload audio")
-    message = gr.Textbox(label="Or type your message",
-                         placeholder="Where is my order?")
-    language = gr.Dropdown(
-        choices=["en-IN", "hi-IN", "kn-IN", "ta-IN", "te-IN"],
-        value="en-IN", label="Speech language"
-    )
-    submit = gr.Button("Send", variant="primary")
-    clear = gr.Button("Clear conversation")
-    audio_out = gr.Audio(label="Spoken reply", type="filepath")
-    evidence = gr.Textbox(label="Retrieved evidence / notes", lines=5)
-
-    submit.click(
-        respond,
-        inputs=[audio_in, message, language, history],
-        outputs=[chat, message, audio_out, evidence]
-    ).then(lambda h: h, inputs=[chat], outputs=[history])
-
-    clear.click(
-        lambda: ([], [], None, ""),
-        outputs=[chat, history, audio_out, evidence]
-    )
+    gr.Markdown("# ZentroMart VoiceOps\nAI support assistant · Gnani STT/TTS · grounded in ZentroMart policies")
+    state = gr.State(None)
+    try:
+        chat = gr.Chatbot(type="messages", label="Conversation", height=380)
+    except TypeError:  # Gradio 6 removed `type` (messages format is the default)
+        chat = gr.Chatbot(label="Conversation", height=380)
+    with gr.Row():
+        audio_in = gr.Audio(sources=["microphone", "upload"], type="filepath", label="Speak")
+        audio_out = gr.Audio(label="Spoken reply", type="filepath", autoplay=True)
+    typed = gr.Textbox(label="…or type", placeholder="My order hasn't arrived. Can I cancel it?")
+    stt_lang = gr.Dropdown(["en-IN", "hi-IN", "kn-IN", "ta-IN", "te-IN", "mr-IN", "bn-IN", "gu-IN"],
+                           value=config.STT_LANGUAGE, label="Speech language")
+    with gr.Row():
+        send = gr.Button("Send", variant="primary")
+        reset = gr.Button("New conversation")
+    info = gr.Textbox(label="Behind the scenes", lines=4)
+    send.click(respond, [audio_in, typed, stt_lang, chat, state], [chat, state, audio_in, typed, audio_out, info])
+    typed.submit(respond, [audio_in, typed, stt_lang, chat, state], [chat, state, audio_in, typed, audio_out, info])
+    reset.click(lambda: ([], None, None, "", None, ""), outputs=[chat, state, audio_in, typed, audio_out, info])
 
 if __name__ == "__main__":
-    demo.launch(share=True, debug=False)
+    demo.launch(share=not args.no_share)

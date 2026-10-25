@@ -16,3 +16,19 @@ audio/
 *.flac
 *.ogg
 .DS_Store
+.gradio/
+Capstone_Project_Dataset_FTTT_2026/
+*.zip
+tickets_created.csv
+reports/eval/*.jsonl
+my_audio/
+.gradio/
+.pytest_cache/
+Capstone_Project_Dataset_FTTT_2026/
+*.zip
+tickets_created.csv
+reports/eval/*.jsonl
+my_audio/
+# sample outputs ARE part of the submission
+!sample_outputs/
+!sample_outputs/**
