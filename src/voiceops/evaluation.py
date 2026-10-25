@@ -113,6 +113,8 @@ def run_questions(agent, qs, outdir, use_asr, skip_step1):
                     reply, rec = step1_answer(text), {"retrieved_sections": [], "decision": ""}
                 else:
                     rec = agent.handle(text, ConversationState())
+                    if rec["route"].get("llm_error"):
+                        raise RuntimeError(rec["route"]["llm_error"])
                     reply = rec["reply"]
             except Exception as e:
                 print(f"  ! {key}: {e}\n  Stopping; re-run the same command later to resume.")
@@ -143,6 +145,8 @@ def run_conversations(agent, conv, outdir):
         try:
             for _, row in g.iterrows():
                 rec = agent.handle(row["customer_message"], state)
+                if rec["route"].get("llm_error"):  # don't save fallback replies as results
+                    raise RuntimeError(rec["route"]["llm_error"])
                 rows.append((row, rec))
         except Exception as e:
             print(f"  ! {cid}: {e}\n  Stopping; re-run the same command later to resume.")

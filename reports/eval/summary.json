@@ -1,0 +1,404 @@
+{
+  "questions_step1": {
+    "n": 52,
+    "content_accuracy": 34.6,
+    "by_language": {
+      "hi-en": 18.2,
+      "en": 42.4,
+      "hi": 25.0
+    },
+    "failures": [
+      {
+        "id": "PQ0003",
+        "intent": "refund_timeline",
+        "missing": [
+          "instant / 2 hours / two hours / तुरंत / turant"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0005",
+        "intent": "warranty",
+        "missing": [
+          "12",
+          "My Orders / app"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0008",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-27 / 27 October 2026 / 27 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0009",
+        "intent": "unsupported",
+        "missing": [
+          "don't have / do not have / not sure / no information / can't find / not able to find / couldn't find / जानकारी नहीं / pata nahi / jaankari nahi / connect / सहयोगी"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0013",
+        "intent": "return_eligibility",
+        "missing": [
+          "सील / seal / बंद / खुला"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0014",
+        "intent": "return_window",
+        "missing": [
+          "10"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0015",
+        "intent": "unsupported",
+        "missing": [
+          "don't have / do not have / not sure / no information / can't find / not able to find / couldn't find / जानकारी नहीं / pata nahi / jaankari nahi / connect / सहयोगी"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0016",
+        "intent": "return_eligibility",
+        "missing": [
+          "unopened / seal / sealed"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0019",
+        "intent": "return_window",
+        "missing": [
+          "10"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0020",
+        "intent": "return_window",
+        "missing": [
+          "15"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0021",
+        "intent": "delivery_attempts",
+        "missing": [
+          "3"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0022",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-27 / 27 October 2026 / 27 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0023",
+        "intent": "fraud",
+        "missing": [
+          "ticket / colleague / human / team / connect / टिकट / सहयोगी"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0024",
+        "intent": "return_window",
+        "missing": [
+          "15"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0027",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-15 / 15 October 2026 / 15 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0028",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-21 / 21 October 2026 / 21 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0029",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-21 / 21 October 2026 / 21 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0031",
+        "intent": "troubleshooting",
+        "missing": [
+          "30"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0032",
+        "intent": "warranty",
+        "missing": [
+          "12",
+          "My Orders / app"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0033",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-24 / 24 October 2026 / 24 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0035",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-17 / 17 October 2026 / 17 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0036",
+        "intent": "return_eligibility",
+        "missing": [
+          "cannot / can't / not returnable / non-returnable / नहीं / nahi / nahin / not be returned"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0037",
+        "intent": "unsupported",
+        "missing": [
+          "don't have / do not have / not sure / no information / can't find / not able to find / couldn't find / जानकारी नहीं / pata nahi / jaankari nahi / connect / सहयोगी"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0039",
+        "intent": "return_eligibility",
+        "missing": [
+          "cannot / can't / not returnable / non-returnable / नहीं / nahi / nahin / not be returned"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0042",
+        "intent": "cancel_order",
+        "missing": [
+          "refuse / decline / reject"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0044",
+        "intent": "return_window",
+        "missing": [
+          "10"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0045",
+        "intent": "refund_timeline",
+        "missing": [
+          "3"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0047",
+        "intent": "late_delivery",
+        "missing": [
+          "79",
+          "wallet / ZentroMart Wallet"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0048",
+        "intent": "damaged_item",
+        "missing": [
+          "48"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0050",
+        "intent": "refund_timeline",
+        "missing": [
+          "ZentroMart Wallet / wallet",
+          "7"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0052",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-24 / 24 October 2026 / 24 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0057",
+        "intent": "return_window",
+        "missing": [
+          "7"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0058",
+        "intent": "return_window",
+        "missing": [
+          "7"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0059",
+        "intent": "refund_timeline",
+        "missing": [
+          "2026-10-22 / 22 October 2026 / 22 अक्टूबर 2026"
+        ],
+        "forbidden": []
+      }
+    ]
+  },
+  "questions_step2": {
+    "n": 52,
+    "content_accuracy": 94.2,
+    "decision_accuracy": 98.1,
+    "retrieval_recall": 100.0,
+    "retrieval_hit": 100.0,
+    "by_language": {
+      "hi-en": 90.9,
+      "en": 97.0,
+      "hi": 87.5
+    },
+    "failures": [
+      {
+        "id": "PQ0005",
+        "intent": "warranty",
+        "missing": [
+          "12"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0037",
+        "intent": "unsupported",
+        "missing": [
+          "don't have / do not have / not sure / no information / can't find / not able to find / couldn't find / जानकारी नहीं / pata nahi / jaankari nahi / connect / सहयोगी"
+        ],
+        "forbidden": []
+      },
+      {
+        "id": "PQ0050",
+        "intent": "refund_timeline",
+        "missing": [
+          "ZentroMart Wallet / wallet"
+        ],
+        "forbidden": []
+      }
+    ]
+  },
+  "conversations": {
+    "turns": 96,
+    "content_accuracy": 93.8,
+    "decision_accuracy": 100.0,
+    "tool_call_accuracy": 100.0,
+    "retrieval_hit": 71.9,
+    "conversations_fully_correct": 17,
+    "n_conversations": 23,
+    "failures": [
+      {
+        "key": "PC004|4",
+        "scenario": "return_eligibility",
+        "missing": [
+          "49"
+        ],
+        "forbidden": [],
+        "decision": "answer",
+        "expected": "answer",
+        "tools_ok": true
+      },
+      {
+        "key": "PC018|4",
+        "scenario": "cancel_unshipped_order",
+        "missing": [
+          "My Orders / app / free"
+        ],
+        "forbidden": [],
+        "decision": "answer",
+        "expected": "answer",
+        "tools_ok": true
+      },
+      {
+        "key": "PC019|4",
+        "scenario": "cancel_shipped_order",
+        "missing": [
+          "7"
+        ],
+        "forbidden": [],
+        "decision": "refuse",
+        "expected": "refuse",
+        "tools_ok": true
+      },
+      {
+        "key": "PC020|4",
+        "scenario": "cancel_shipped_order",
+        "missing": [
+          "7"
+        ],
+        "forbidden": [],
+        "decision": "refuse",
+        "expected": "refuse",
+        "tools_ok": true
+      },
+      {
+        "key": "PC021|3",
+        "scenario": "failed_verification",
+        "missing": [
+          "again / match / दोबारा / मेल"
+        ],
+        "forbidden": [],
+        "decision": "clarify",
+        "expected": "clarify",
+        "tools_ok": true
+      },
+      {
+        "key": "PC022|3",
+        "scenario": "failed_verification",
+        "missing": [
+          "again / match / दोबारा / मेल"
+        ],
+        "forbidden": [],
+        "decision": "clarify",
+        "expected": "clarify",
+        "tools_ok": true
+      }
+    ]
+  }
+}
