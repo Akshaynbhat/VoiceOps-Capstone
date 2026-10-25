@@ -90,4 +90,4 @@ python app.py --dataset <dataset>        # Gradio: speak or type; shows the sect
 
 
 🎥 **Demo Video:** The demo video is included in this repository as [`demo.mp4`](./demo.mp4).  
-🔗 **Video Link:** https://github.com/Akshaynbhat/VoiceOps-Capstone/blob/main/demo.mp4)](https://drive.google.com/file/d/1G0QcyTFp-PI2GNzFwmeBWUqb8fZ9zoTl/view?usp=drive_link) — a separate link is also provided for convenient access.
+🔗 **Video Link:** https://drive.google.com/file/d/1G0QcyTFp-PI2GNzFwmeBWUqb8fZ9zoTl/view?usp=drive_link — a separate link is also provided for convenient access.
