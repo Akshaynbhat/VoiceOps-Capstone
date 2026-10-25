@@ -29,7 +29,6 @@ cp .env.example .env                     # then fill in GROQ_API_KEY and GNANI_A
 
 - **Keys:** `GROQ_API_KEY` (LLM) and `GNANI_API_KEY` (speech) are read from the environment, from `.env`, or from Colab Secrets. No keys are in the repo.
 - **Dataset:** not committed. Download `Capstone_Project_Dataset_FTTT_2026.zip`, extract it, and pass the folder with `--dataset`.
-- **Colab:** open `VoiceOps_Colab.ipynb`, which runs every step below in order.
 
 ## Run command (batch, used for testing)
 
