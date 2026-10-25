@@ -88,3 +88,7 @@ python app.py --dataset <dataset>        # Gradio: speak or type; shows the sect
 ## Submission contents
 
 `README.md`, `.env.example`, `requirements.txt`, `run.py`, `src/`, `report.pdf`, `demo.mp4`, `sample_outputs/`
+
+
+🎥 **Demo Video:** The demo video is included in this repository as [`demo.mp4`](./demo.mp4).  
+🔗 **Video Link:** [Watch the VoiceOps Demo](https://github.com/Akshaynbhat/VoiceOps-Capstone/blob/main/demo.mp4) — a separate link is also provided for convenient access.
